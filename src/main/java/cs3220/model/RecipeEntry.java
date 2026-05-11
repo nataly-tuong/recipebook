@@ -7,6 +7,7 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -22,6 +23,9 @@ public class RecipeEntry {
 	@ElementCollection
 	@NotEmpty (message = "At least one ingredient is required.")
 	private List<@NotBlank(message = "Ingredient cannot be blank") String> ingredients = new ArrayList<>();
+	
+	@ManyToOne
+	private UserEntry user;
 	
 	public RecipeEntry() {}
 	
@@ -53,6 +57,15 @@ public class RecipeEntry {
 	public void setIngredients(List<String> ingredients) {
 		this.ingredients = ingredients;
 	}
+
+	public UserEntry getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntry user) {
+		this.user = user;
+	}
+
 	
 	
 }

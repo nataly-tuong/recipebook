@@ -1,4 +1,3 @@
-<#import "/spring.ftl" as spring>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,49 +25,80 @@
   </head>
   <body class="container-fluid px-0">
   		<div class="fixed px-4 py-3 d-flex border-bottom justify-content-between">
+	  		
+	  		<div class="d-flex align-items-center">
+		  		<i class="bi me-2 fs-4 bi-fork-knife text-success"></i>
+		  		<h4 class="fw-bold">RecipeBook</h4>
+	  		</div>
+	  		
+	  		<div class="d-flex gap-3">
+	  			<button type="button" id="logoutButton" class="btn btn-success">Logout</button>
+	  		</div>
   		
-  		<div class="d-flex align-items-center">
-  		<i class="bi me-2 fs-4 bi-fork-knife text-success"></i>
-  		<h4 class="fw-bold">RecipeBook</h4>
   		</div>
   		
-  		<div class="d-flex gap-3">
-  			<h4 class="text-secondary">Hello $(user.name)</h4>
-  		<a href="/logout" class="btn btn-success">Logout</a>
+  	
+  	<div class="modal fade" id="recipeModal" tabindex="-1">
+  		<div class="modal-dialog">
+  			<div class="modal-content">
+  				<form id="recipeForm">
+  					<div class="modal-header">
+  						<h5 class="modal-title" id="recipeModalTitle">Add Recipe</h5>
+  						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+  					</div>
+  					
+  					<div class="modal-body">
+  						<input type="hidden" id="recipeId"/>
+  						<div class="mb-3">
+  							<label for="recipeName" class="form-label fw-bold">Recipe</label>
+  							<input type="text" id="recipeName" class="form-control" placeholder="Recipe name" required/>
+  						</div>
+  						
+  						<div class="mb-3">
+  							<label for="recipeIngredients" class="form-label fw-bold">Ingredients</label>
+  							<textarea id="recipeIngredients" class="form-control" rows="6" placeholder="Separate ingredients with commas" required></textarea>
+  						</div>
+  						
+  					</div>
+  					
+  					<div class="modal-footer">
+  						<button type="submit" class="btn btn-success" id="saveRecipeButton">Save Recipe
+  						</button>
+  						
+  						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+  						</button>
+  					</div>
+  				</form>
+  			</div>
   		</div>
+  	</div>
+  	
+  	<div id="recipeBookSection">
   		
-  		</div>
   		
   		<div class="container m-5">
   		
   		<div class="d-flex justify-content-between"> 
-  		<h2>My Recipes</h2>
+  		<div>
+	  		<h2>My Recipes</h2>
+	  		<p class="text-secondary">Manage your recipes</p>
+  		</div>
+  
   		<div class="position-relative mb-3">
-			    			<i class="bi bi-plus fs-3 position-absolute text-white top-50 start-0 translate-middle-y ps-3"></i>
-			    		<a href="/addrecipe" class="btn btn-success ps-5">Add Recipe</a>
+			    			
+			    		<button type="button" id="showAddRecipeButton" class="btn btn-success d-flex align-items-center gap-2 px-2 py-0">
+			    		<i class="bi bi-plus fs-4"></i>
+			    		<span>Add Recipe</span>
+			    		</button>
 			    		</div>
   		
   		</div>
-  		<p class="text-secondary">Manage your recipes</p>
-  			<div class="d-flex justify-content-between border rounded p-3 shadow-sm ">
-  				<div class="d-flex flex-column">
-  					<h5>Sphagetti</h5>
-  					<p class="text-secondary">Ingredients:</p>
-  				</div>
+  		
+  			<div id="recipeList"></div>
   				
-  				<div class="d-flex gap-3"> 
-	  				<div class="position-relative mb-3">
-				    	<i class="bi bi-trash fs-4 position-absolute text-white top-50 start-0 translate-middle-y ps-3"></i>
-				    	<a href="/addrecipe" class="btn btn-danger ps-5">Delete</a>
-				  	</div>
-				  	<div class="position-relative mb-3">
-				    	<i class="bi bi-pencil fs-4 position-absolute text-white top-50 start-0 translate-middle-y ps-3"></i>
-				    	<a href="/addrecipe" class="btn btn-primary ps-5">Edit</a>
-				  	</div>
-  				</div>
-  				
-  			</div>
   		</div>
+  	</div>
+  	
   		
   </body>
 </html>
