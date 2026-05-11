@@ -176,7 +176,8 @@ $(document).ready(function() {
 					let leftSide = $("<div></div>");
 					
 					leftSide.append("<h5>"+recipe.name+"</h5>");
-					leftSide.append("<p class='text-secondary mb-1'>Ingredients:</p>");
+					leftSide.append("<p class='text-secondary fst-italic small mb-1'>Recipe originally posted by "+recipe.userName+"</p>");
+					leftSide.append("<p class='text-warning fw-bold mb-1'>Ingredients:</p>");
 					
 					let ingredientList = $("<ul></ul>");
 					

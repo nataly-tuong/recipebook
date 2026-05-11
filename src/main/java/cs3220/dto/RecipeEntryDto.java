@@ -10,6 +10,8 @@ public class RecipeEntryDto {
 	private String name;
 	private List<String> ingredients = new ArrayList<>();
 	
+	private String userName;
+	
 	public RecipeEntryDto() {
 		
 	}
@@ -18,6 +20,7 @@ public class RecipeEntryDto {
 		id = recipe.getId();
 		name = recipe.getName();
 		ingredients = recipe.getIngredients();
+		userName = recipe.getUser().getName();
 	}
 	
 	public RecipeEntry newRecipe() {
@@ -36,6 +39,14 @@ public class RecipeEntryDto {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getName() {

@@ -31,7 +31,8 @@
 		  		<h4 class="fw-bold">RecipeBook</h4>
 	  		</div>
 	  		
-	  		<div class="d-flex gap-3">
+	  		<div class="d-flex gap-3 align-items-center">
+	  			<h5 class="text-secondary mb-0">Hi ${user.name}!</h5>
 	  			<button type="button" id="logoutButton" class="btn btn-success">Logout</button>
 	  		</div>
   		
