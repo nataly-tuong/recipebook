@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+
+.leftPicture {
+	background-image: url("../images/pexels-dbaler-29990039.jpg");
+	background-size: cover;
+	background-position: center;
+	filter: brightness(0.85);
+}
+
+.leftPictureRegister {
+	background-image: url("../images/pexels-lily-lili-17626726-37172956.jpg");
+	background-size: cover;
+	background-position: center;
+	filter: brightness(0.85);
+}
+
+
+.loginCard {
+	width: 100%;
+	max-width: 400px;
+	min-height: 600px;
+}
