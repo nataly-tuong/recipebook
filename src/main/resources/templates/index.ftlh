@@ -20,7 +20,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
     <script src="/javascript/LoginAndRecipe.js"></script>
   </head>
   <body class="container-fluid px-0">
@@ -60,6 +60,7 @@
 			    			<i class="bi bi-lock position-absolute text-secondary top-50 start-0 translate-middle-y ps-3"></i>
 			    		<input required class="w-100 ps-5 px-2 form-control" placeholder="Enter your password..." type="password" name="password" id="loginPassword"/>
 			    		</div>
+			    		<div class="systemMessage" class="text-danger fw-bold mb-2"></div>
 			    		<button type="submit" class="mt-3 btn btn-success w-100 shadow-sm">Sign In</button>
 			    	</form>
 			    		<hr/>
@@ -111,7 +112,7 @@
 			    		<input required class="w-100 ps-5 px-2 form-control" placeholder="Enter your password..." type="password" name="password" id="registerPassword"/>
 			    	
 			    		</div>
-			    		
+			    		<div class="systemMessage" class="text-danger fw-bold mb-2"></div>
 			    		<button type="submit" class="mt-3 btn btn-success w-100 shadow-sm">Register</button>
 			    	</form>
 			    		<hr/>
@@ -122,7 +123,7 @@
   		</div>
   	</div>
   	
-  		<div id="systemMessage" class="text-danger fw-bold mb-2"></div>
+  
   		
   </body>
 </html>
