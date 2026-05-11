@@ -1,4 +1,8 @@
+var currentUserId = null;
+
 $(document).ready(function() {
+	
+	
 	$("#showRegisterButton").click(function() {
 		$("#registerSection .systemMessage").text("");
 		$("#loginSection").hide();
@@ -32,7 +36,7 @@ $(document).ready(function() {
 					$("#loginSection .systemMessage")
 						.removeClass("text-success")
 						.addClass("text-danger")
-						.text(result);
+						.html(result);
 				}
 			},
 			error: function (xhr,status,error) {
@@ -73,7 +77,7 @@ $(document).ready(function() {
 					$("#registerSection .systemMessage")
 						.removeClass("text-success")
 						.addClass('text-danger')
-						.text(result);
+						.html(result);
 				}
 			},
 			error: function (xhr,status,error) {
@@ -85,7 +89,14 @@ $(document).ready(function() {
 		});
 		
 	if ($("#recipeList").length>0) {
-		autoGenerateRecipes();
+		$.ajax({
+			url: "/api/currentUser",
+			type: "GET", 
+			success: function(user) {
+				currentUserId = user.id; 
+				autoGenerateRecipes();
+			}
+		});
 	}
 	
 	$("#showAddRecipeButton").click(function () {
@@ -122,22 +133,29 @@ $(document).ready(function() {
 			data: JSON.stringify(recipeData),
 			
 			success: function (result) {
+
 				if (result === "success") {
+
+					$("#systemMessage").text("");
+
 					bootstrap.Modal
 						.getInstance(document.getElementById("recipeModal"))
 						.hide();
-						
+
 					autoGenerateRecipes();
 				}
 				else {
-					console.log(result);
+
+					bootstrap.Modal
+						.getInstance(document.getElementById("recipeModal"))
+						.hide();
+
+					$("#systemMessage")
+						.removeClass("text-success")
+						.addClass("text-danger")
+						.html(result);
 				}
-			},
-			error: function (xhr,status,error) {
-										console.log("xhr:"+xhr);
-										console.log("status:"+status);
-										console.log("error"+error);
-									}
+			}
 			});
 		});
 		
@@ -198,6 +216,15 @@ $(document).ready(function() {
 					let editButton = $("<button class='btn btn-primary btn-sm'>Edit</button>");
 					
 					editButton.click(function() {
+						if (recipe.userId != currentUserId) {
+							$("#systemMessage")
+								.removeClass("text-success")
+								.addClass("text-danger")
+								.text("You can only edit your own recipes")
+							return;
+						}				  
+						$("#systemMessage").text("");
+						
 						$("#recipeModalTitle").text("Edit Recipe");
 						
 						$("#recipeId").val(recipe.id);
@@ -232,16 +259,16 @@ $(document).ready(function() {
 			
 			success: function(result) {
 				if (result === "success") {
+					$("#systemMessage").text("");
+					
 					autoGenerateRecipes();
 				}
 				else {
-					console.log(result);
+					$("#systemMessage")
+						.removeClass("text-success")
+						.addClass("text-danger")
+						.html(result);
 				}
-			},
-			error: function (xhr,status,error) {
-																console.log("xhr:"+xhr);
-																console.log("status:"+status);
-																console.log("error"+error);
-															}
+			}
 		});
 }

@@ -1,13 +1,19 @@
 package cs3220.dto;
 
 import cs3220.model.UserEntry;
+import jakarta.validation.constraints.NotBlank;
 
 public class UserEntryDto {
 	private Integer id;
-	private String email;
+
+	@NotBlank (message = "Name is required")
 	private String name;
-	private String password;
 	
+	@NotBlank (message = "Email is required")
+	private String email;
+	
+	@NotBlank (message = "Password is required")
+	private String password;
 	public UserEntryDto() {
 		
 	}

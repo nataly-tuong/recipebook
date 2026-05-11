@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,7 @@ import cs3220.model.UserEntry;
 import cs3220.repository.RecipeEntryRepository;
 import cs3220.repository.UserEntryRepository;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -33,17 +36,45 @@ public class ApiController {
 	
 	@PostMapping("/login")
 	public String login(@RequestBody UserEntryDto dto, HttpSession session) {
-		UserEntry user = userRepo.findByEmail(dto.getEmail());
-		
-		if ((user==null) || !user.getPassword().equals(dto.getPassword())) {
-			return "Invalid email or password";
-		}
-		session.setAttribute("user", user);
-		return "success";
+
+	    String errors = "";
+
+	    if (dto.getEmail() == null || dto.getEmail().isBlank()) {
+	        errors += "Email is required<br>";
+	    }
+
+	    if (dto.getPassword() == null || dto.getPassword().isBlank()) {
+	        errors += "Password is required<br>";
+	    }
+
+	    if (!errors.isBlank()) {
+	        return errors;
+	    }
+
+	    UserEntry user = userRepo.findByEmail(dto.getEmail());
+
+	    if ((user == null) || !user.getPassword().equals(dto.getPassword())) {
+	        return "Invalid email or password";
+	    }
+
+	    session.setAttribute("user", user);
+
+	    return "success";
 	}
 	
 	@PostMapping("/register")
-	public String register(@RequestBody UserEntryDto dto) {
+	public String register(@Valid @RequestBody UserEntryDto dto, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+
+		    String errors = "";
+
+		    for (FieldError error : bindingResult.getFieldErrors()) {
+		        errors += error.getDefaultMessage() + "<br>";
+		    }
+
+		    return errors;
+		}
+		
 		if (userRepo.findByEmail(dto.getEmail()) != null) {
 			return "Email already exists";
 		}
@@ -62,12 +93,23 @@ public class ApiController {
 			result.add(new RecipeEntryDto(recipe));
 		}
 		
-		result.sort(Comparator.comparing(RecipeEntryDto::getName));
+		result.sort(Comparator.comparing(RecipeEntryDto::getName, String.CASE_INSENSITIVE_ORDER));
 		return result;
 	}
 	
 	@PostMapping("/addRecipe")
-	public String addRecipe(@RequestBody RecipeEntryDto dto, HttpSession session) {
+	public String addRecipe(@Valid @RequestBody RecipeEntryDto dto, BindingResult bindingResult, HttpSession session) {
+		if (bindingResult.hasErrors()) {
+
+		    String errors = "";
+
+		    for (FieldError error : bindingResult.getFieldErrors()) {
+		        errors += error.getDefaultMessage() + "<br>";
+		    }
+
+		    return errors;
+		}
+		
 		UserEntry user = (UserEntry) session.getAttribute("user");
 		
 		RecipeEntry recipe = dto.newRecipe();
@@ -79,10 +121,26 @@ public class ApiController {
 	
 	
 	@PutMapping("/editRecipe/{id}")
-	public String editRecipe(@PathVariable Integer id, @RequestBody RecipeEntryDto dto, HttpSession session) {
+	public String editRecipe(@PathVariable Integer id, @Valid @RequestBody RecipeEntryDto dto, BindingResult bindingResult, HttpSession session) {
+		if (bindingResult.hasErrors()) {
+
+		    String errors = "";
+
+		    for (FieldError error : bindingResult.getFieldErrors()) {
+		        errors += error.getDefaultMessage() + "<br>";
+		    }
+
+		    return errors;
+		}
+		
 		UserEntry user = (UserEntry) session.getAttribute("user");
 		
 		RecipeEntry recipe = recipeRepo.findById(id).orElse(null);
+		
+
+		if (!recipe.getUser().getId().equals(user.getId())) {
+			return "You can only edit your own recipes";
+		}
 		
 		recipe.setName(dto.getName());
 		recipe.setIngredients(dto.getIngredients());
@@ -97,6 +155,11 @@ public class ApiController {
 		
 		RecipeEntry recipe = recipeRepo.findById(id).orElse(null);
 		
+
+		if (!recipe.getUser().getId().equals(user.getId())) {
+			return "You can only delete your own recipes";
+		}
+		
 		recipeRepo.delete(recipe);
 		return "success";
 	}
@@ -107,4 +170,15 @@ public class ApiController {
 		return "success";
 	}
 	
+	@GetMapping("/currentUser")
+	public UserEntryDto currentUser(HttpSession session) {
+		UserEntry user = (UserEntry) session.getAttribute("user");
+		
+		if (user==null) {
+			return null;
+		}
+		
+		return new UserEntryDto(user);
+	}
+
 }

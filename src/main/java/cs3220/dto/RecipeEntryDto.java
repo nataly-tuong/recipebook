@@ -4,14 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs3220.model.RecipeEntry;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 public class RecipeEntryDto {
 	private Integer id;
+	
+	@NotBlank (message = "Recipe name is required")
 	private String name;
-	private List<String> ingredients = new ArrayList<>();
 	
+	@NotEmpty (message = "At least one ingredient is required.")
+	private List<@NotBlank(message = "Ingredient cannot be blank") String> ingredients = new ArrayList<>();
+	
+	private Integer userId;
 	private String userName;
-	
+
+
 	public RecipeEntryDto() {
 		
 	}
@@ -20,7 +28,11 @@ public class RecipeEntryDto {
 		id = recipe.getId();
 		name = recipe.getName();
 		ingredients = recipe.getIngredients();
-		userName = recipe.getUser().getName();
+		
+		if (recipe.getUser()!=null) {
+			userId = recipe.getUser().getId();
+			userName = recipe.getUser().getName();
+		}
 	}
 	
 	public RecipeEntry newRecipe() {
@@ -63,6 +75,14 @@ public class RecipeEntryDto {
 
 	public void setIngredients(List<String> ingredients) {
 		this.ingredients = ingredients;
+	}
+	
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 	

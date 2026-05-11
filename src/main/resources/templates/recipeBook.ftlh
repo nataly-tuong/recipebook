@@ -38,7 +38,7 @@
   		
   		</div>
   		
-  	
+  	<div id="systemMessage" class="text-center fw-bold text-danger mb-3"></div>
   	<div class="modal fade" id="recipeModal" tabindex="-1">
   		<div class="modal-dialog">
   			<div class="modal-content">
@@ -52,12 +52,12 @@
   						<input type="hidden" id="recipeId"/>
   						<div class="mb-3">
   							<label for="recipeName" class="form-label fw-bold">Recipe</label>
-  							<input type="text" id="recipeName" class="form-control" placeholder="Recipe name" required/>
+  							<input type="text" id="recipeName" class="form-control" placeholder="Recipe name"/>
   						</div>
   						
   						<div class="mb-3">
   							<label for="recipeIngredients" class="form-label fw-bold">Ingredients</label>
-  							<textarea id="recipeIngredients" class="form-control" rows="6" placeholder="Separate ingredients with commas" required></textarea>
+  							<textarea id="recipeIngredients" class="form-control" rows="6" placeholder="Separate ingredients with commas"></textarea>
   						</div>
   						
   					</div>
@@ -81,7 +81,7 @@
   		
   		<div class="d-flex justify-content-between"> 
   		<div>
-	  		<h2>My Recipes</h2>
+	  		<h2>Our Recipes</h2>
 	  		<p class="text-secondary">Manage your recipes</p>
   		</div>
   

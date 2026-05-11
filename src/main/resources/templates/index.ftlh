@@ -51,14 +51,14 @@
 			    		<h5>Email</h5>
 			    		<div class="position-relative mb-3">
 			    			<i class="bi bi-envelope position-absolute text-secondary top-50 start-0 translate-middle-y ps-3"></i>
-			    		<input required class="w-100 ps-5 px-2 form-control" placeholder="Enter your email..." type="email" name="email" id="loginEmail"/>
+			    		<input class="w-100 ps-5 px-2 form-control" placeholder="Enter your email..." type="email" name="email" id="loginEmail"/>
 			    		</div>
 			    	
 			    		
 			    		<h5>Password</h5>
 			    		<div class="position-relative mb-3">
 			    			<i class="bi bi-lock position-absolute text-secondary top-50 start-0 translate-middle-y ps-3"></i>
-			    		<input required class="w-100 ps-5 px-2 form-control" placeholder="Enter your password..." type="password" name="password" id="loginPassword"/>
+			    		<input class="w-100 ps-5 px-2 form-control" placeholder="Enter your password..." type="password" name="password" id="loginPassword"/>
 			    		</div>
 			    		<div class="systemMessage" class="text-danger fw-bold mb-2"></div>
 			    		<button type="submit" class="mt-3 btn btn-success w-100 shadow-sm">Sign In</button>
@@ -97,19 +97,19 @@
 			    		<h5>Name</h5>
 			    		<div class="position-relative mb-3">
 			    			<i class="bi bi-person position-absolute text-secondary top-50 start-0 translate-middle-y ps-3"></i>
-			    		<input required class="w-100 ps-5 px-2 form-control" placeholder="Enter your name..." type="text" name="name" id="registerName"/>
+			    		<input class="w-100 ps-5 px-2 form-control" placeholder="Enter your name..." type="text" name="name" id="registerName"/>
 			    		</div>
 			    		
 			    		<h5>Email</h5>
 			    		<div class="position-relative mb-3">
 			    			<i class="bi bi-envelope position-absolute text-secondary top-50 start-0 translate-middle-y ps-3"></i>
-			    		<input required class="w-100 ps-5 px-2 form-control" placeholder="Enter your email..." type="email" name="email" id="registerEmail"/>
+			    		<input class="w-100 ps-5 px-2 form-control" placeholder="Enter your email..." type="email" name="email" id="registerEmail"/>
 			    		</div>
 			    		
 			    		<h5>Password</h5>
 			    		<div class="position-relative mb-3">
 			    			<i class="bi bi-lock position-absolute text-secondary top-50 start-0 translate-middle-y ps-3"></i>
-			    		<input required class="w-100 ps-5 px-2 form-control" placeholder="Enter your password..." type="password" name="password" id="registerPassword"/>
+			    		<input class="w-100 ps-5 px-2 form-control" placeholder="Enter your password..." type="password" name="password" id="registerPassword"/>
 			    	
 			    		</div>
 			    		<div class="systemMessage" class="text-danger fw-bold mb-2"></div>
