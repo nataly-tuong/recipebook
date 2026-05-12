@@ -20,8 +20,8 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     />
    <script src="https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
-    <script src="/javascript/LoginAndRecipe.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
+    <script src="/assets/javascript/LoginAndRecipe.js"></script>
   </head>
   <body class="container-fluid px-0">
   		<div class="fixed px-4 py-3 d-flex border-bottom justify-content-between">

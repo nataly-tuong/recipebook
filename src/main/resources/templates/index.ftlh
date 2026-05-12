@@ -21,7 +21,7 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
-    <script src="/javascript/LoginAndRecipe.js"></script>
+    <script src="/assets/javascript/LoginAndRecipe.js"></script>
   </head>
   <body class="container-fluid px-0">
   
